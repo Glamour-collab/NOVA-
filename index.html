@@ -146,6 +146,7 @@
       text-align:center
     }
 
+    /* الشريط السفلي */
     .bottom-bar{
       position:fixed;
       z-index:100;
@@ -154,9 +155,16 @@
       bottom:max(12px,env(safe-area-inset-bottom));
       height:67px;
       border-radius:17px;
-      background:rgba(8,28,37,.97);
-      border:1px solid rgba(37,211,102,.28);
-      box-shadow:0 10px 35px rgba(0,0,0,.38);
+      background:linear-gradient(
+        145deg,
+        rgba(13,39,49,.99),
+        rgba(5,23,32,.99)
+      );
+      border:1px solid rgba(37,211,102,.42);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.42),
+        0 0 15px rgba(37,211,102,.08),
+        inset 0 1px 0 rgba(255,255,255,.08);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px)
     }
