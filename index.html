@@ -44,7 +44,6 @@
       position: relative;
     }
 
-    /* اسم المتجر */
     .brand {
       text-align: center;
       margin-top: 10px;
@@ -78,7 +77,6 @@
       text-align: center;
     }
 
-    /* المنطقة الرئيسية */
     .contact-area {
       width: 100%;
       max-width: 430px;
@@ -98,7 +96,6 @@
       color: #f5f9fa;
     }
 
-    /* زر واتساب الأوسط */
     .whatsapp-main {
       width: 145px;
       height: 145px;
@@ -130,7 +127,6 @@
         box-shadow .15s ease;
     }
 
-    /* لون الزر عند الضغط */
     .whatsapp-main:active {
       transform: scale(.95);
 
@@ -146,7 +142,6 @@
         inset 0 2px 8px rgba(0, 0, 0, .22);
     }
 
-    /* شعار واتساب */
     .whatsapp-main .wa-icon {
       width: 58px;
       height: 58px;
@@ -160,7 +155,6 @@
       text-align: center;
     }
 
-    /* الشريط السفلي */
     .bottom-bar {
       position: fixed;
       z-index: 100;
@@ -214,7 +208,6 @@
         transform .15s ease;
     }
 
-    /* لون الزر السفلي عند الضغط */
     .bottom-link:active {
       transform: scale(.98);
       background: #075e38;
@@ -226,7 +219,6 @@
       height: 28px;
     }
 
-    /* النص السفلي */
     .footer {
       position: absolute;
       bottom: 93px;
@@ -237,7 +229,6 @@
       text-align: center;
     }
 
-    /* الشاشات الصغيرة */
     @media (max-width: 380px) {
 
       .page {
@@ -260,105 +251,154 @@
   </style>
 
 
-  <!-- =====================================================
-       TikTok Pixel
-       ضع كود TikTok Pixel الخاص بك هنا
-       ===================================================== -->
-
-  <!--
+  <!-- TikTok Pixel Code Start -->
   <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject = t;
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;
+    var ttq=w[t]=w[t]||[];
 
-      var ttq = w[t] = w[t] || [];
+    ttq.methods=[
+      "page",
+      "track",
+      "identify",
+      "instances",
+      "debug",
+      "on",
+      "off",
+      "once",
+      "ready",
+      "alias",
+      "group",
+      "enableCookie",
+      "disableCookie",
+      "holdConsent",
+      "revokeConsent",
+      "grantConsent"
+    ];
 
-      ttq.methods = [
-        "page",
-        "track",
-        "identify",
-        "instances",
-        "debug",
-        "on",
-        "off",
-        "once",
-        "ready",
-        "alias",
-        "group",
-        "enableCookie",
-        "disableCookie"
-      ];
-
-      ttq.setAndDefer = function (t, e) {
-        t[e] = function () {
-          t.push(
-            [e].concat(
-              Array.prototype.slice.call(arguments, 0)
-            )
+    ttq.setAndDefer=function(t,e){
+      t[e]=function(){
+        t.push(
+          [e].concat(
+            Array.prototype.slice.call(arguments,0)
           )
-        }
-      };
+        )
+      }
+    };
 
-      for (var i = 0; i < ttq.methods.length; i++) {
-        ttq.setAndDefer(
-          ttq,
-          ttq.methods[i]
-        );
+    for(var i=0;i<ttq.methods.length;i++)
+      ttq.setAndDefer(ttq,ttq.methods[i]);
+
+    ttq.instance=function(t){
+      for(
+        var e=ttq._i[t]||[],
+        n=0;
+        n<ttq.methods.length;
+        n++
+      )
+        ttq.setAndDefer(e,ttq.methods[n]);
+
+      return e
+    };
+
+    ttq.load=function(e,n){
+      var r="https://analytics.tiktok.com/i18n/pixel/events.js",
+      o=n&&n.partner;
+
+      ttq._i=ttq._i||{};
+      ttq._i[e]=[];
+      ttq._i[e]._u=r;
+
+      ttq._t=ttq._t||{};
+      ttq._t[e]=+new Date;
+
+      ttq._o=ttq._o||{};
+      ttq._o[e]=n||{};
+
+      n=document.createElement("script");
+      n.type="text/javascript";
+      n.async=!0;
+      n.src=r+"?sdkid="+e+"&lib="+t;
+
+      e=document.getElementsByTagName("script")[0];
+      e.parentNode.insertBefore(n,e)
+    };
+
+    ttq.load('DAVMEO3C77U27N8GVN40');
+    ttq.page();
+
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+
+
+  <!-- أحداث TikTok -->
+  <script>
+    /*
+      حماية من التكرار:
+      يتم السماح بإرسال InitiateCheckout + Contact
+      مرة واحدة فقط لكل تحميل للصفحة.
+    */
+
+    let tikTokButtonEventsSent = false;
+
+    function trackWhatsAppEvents(event) {
+
+      if (event) {
+        event.preventDefault();
       }
 
-      ttq.instance = function (t) {
-        for (
-          var e = ttq._i[t] || [],
-              n = 0;
-          n < ttq.methods.length;
-          n++
-        ) {
-          ttq.setAndDefer(
-            e,
-            ttq.methods[n]
-          );
-        }
+      /*
+        إذا تم إرسال الأحداث مسبقًا،
+        لا نرسل إشارات إضافية.
+      */
+      if (tikTokButtonEventsSent) {
+        return;
+      }
 
-        return e;
-      };
+      tikTokButtonEventsSent = true;
 
-      ttq.load = function (e, n) {
+      /*
+        الحدث الأول:
+        InitiateCheckout
+      */
+      ttq.track('InitiateCheckout');
 
-        var i =
-          "https://analytics.tiktok.com/i18n/pixel/events.js";
+      /*
+        الحدث الثاني:
+        Contact
+      */
+      ttq.track('Contact');
 
-        ttq._i = ttq._i || {};
-        ttq._i[e] = [];
+      /*
+        نترك وقتًا قصيرًا للـ Pixel
+        لتسجيل الأحداث قبل فتح واتساب.
+      */
+      const whatsappURL = this.href;
 
-        ttq._t = ttq._t || {};
-        ttq._t[e] = +new Date;
+      setTimeout(function () {
+        window.location.href = whatsappURL;
+      }, 180);
+    }
 
-        ttq._o = ttq._o || {};
-        ttq._o[e] = n || {};
+    document.addEventListener('DOMContentLoaded', function () {
 
-        var o = d.createElement("script");
+      const whatsappButtons =
+        document.querySelectorAll(
+          '#whatsappButton, .bottom-link'
+        );
 
-        o.type = "text/javascript";
-        o.async = true;
+      whatsappButtons.forEach(function (button) {
 
-        o.src =
-          i +
-          "?sdkid=" +
-          e +
-          "&lib=" +
-          t;
+        button.addEventListener(
+          'click',
+          trackWhatsAppEvents
+        );
 
-        var a =
-          d.getElementsByTagName("script")[0];
+      });
 
-        a.parentNode.insertBefore(o, a);
-      };
-
-      ttq.load("ضع_معرف_البكسل_هنا");
-      ttq.page();
-
-    }(window, document, "ttq");
+    });
   </script>
-  -->
 
 </head>
 
@@ -367,7 +407,6 @@
 
   <main class="page">
 
-    <!-- اسم المتجر -->
     <header class="brand">
 
       <div class="brand-name">
@@ -384,7 +423,6 @@
     </header>
 
 
-    <!-- المنطقة الرئيسية -->
     <section class="contact-area">
 
       <h1 class="main-title">
