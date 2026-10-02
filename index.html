@@ -287,20 +287,12 @@
 
   <!-- TikTok Events -->
   <script>
-  let tikTokButtonEventsSent = false;
 
   function trackWhatsAppEvents(event) {
 
     if (event) {
       event.preventDefault();
     }
-
-    /* منع تكرار إشارات TikTok */
-    if (tikTokButtonEventsSent) {
-      return;
-    }
-
-    tikTokButtonEventsSent = true;
 
     /* InitiateCheckout مع Content ID */
     ttq.track('InitiateCheckout', {
